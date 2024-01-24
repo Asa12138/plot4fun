@@ -1,0 +1,29 @@
+Package: plot4fun
+Type: Package
+Title: Just plot for fun
+Version: 0.1.0
+Authors@R:
+    person("Chen", "Peng", email ="pengchen2001@zju.edu.cn", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9449-7606"))
+Description: This is a package containing many interseting functions for plotting.
+License: GPL-3
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
+Depends: 
+    R (>= 4.1.0)
+Imports: 
+    magrittr,
+    ggplot2,
+    stats,
+    utils,
+    grDevices,
+    reshape2,
+    graphics,
+    pcutils
+Suggests:
+    ggforce,
+    plot3D,
+    magick,
+    showtext,
+    sysfonts,
+    wordcloud2
