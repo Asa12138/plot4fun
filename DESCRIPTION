@@ -1,10 +1,11 @@
 Package: plot4fun
 Type: Package
-Title: Just plot for fun
+Title: Just Plot for Fun
 Version: 0.1.0
 Authors@R:
     person("Chen", "Peng", email ="pengchen2001@zju.edu.cn", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9449-7606"))
-Description: This is a package containing many interseting functions for plotting.
+Description: This is a package containing many interesting functions for plotting, 
+    such as `make_LED`, plot `Olympic_rings` and so on.
 License: GPL-3
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -24,6 +25,7 @@ Suggests:
     ggforce,
     plot3D,
     magick,
+    gifski,
     showtext,
     sysfonts,
     wordcloud2

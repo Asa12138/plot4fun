@@ -3,6 +3,7 @@
 
 ## usethis namespace: start
 #' @importFrom utils data head download.file untar combn
+#' @importFrom stats runif
 #' @importFrom grDevices colorRampPalette png pdf dev.off
 #' @importFrom graphics plot.new text legend hist par
 #' @importFrom pcutils lib_ps get_cols update_param download2

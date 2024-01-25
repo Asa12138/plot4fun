@@ -27,7 +27,7 @@ my_wordcloud <- function(str_vector,
 #'
 #' @return plot
 #' @export
-#' @references https://mp.weixin.qq.com/s/W-BYPR3UXL120XWpTmN3rA
+#' @references \code{https://mp.weixin.qq.com/s/W-BYPR3UXL120XWpTmN3rA}
 give_you_a_rose <- function(color = "red3") {
     lib_ps("plot3D", library = FALSE)
     # 生成绘图数据
@@ -225,10 +225,11 @@ Olympic_rings <- function() {
 #'
 #' @param image_file image_file
 #' @param size 32
+#' @param breaks breaks, default 2
 #'
 #' @return chr_mat
 #' @export
-convert_img_to_matrix <- function(image_file, size = 32) {
+convert_img_to_matrix <- function(image_file, size = 32, breaks = 2) {
     lib_ps("magick", library = FALSE)
     # 读取并返回图像
     image <- magick::image_read(image_file)
@@ -237,7 +238,12 @@ convert_img_to_matrix <- function(image_file, size = 32) {
     image <- magick::image_scale(image, paste0(size, "x", size))
 
     # 提取像素值并转换为01矩阵
-    chr_mat <- matrix(as.integer(magick::image_data(image)[1, , ] < 128), nrow = size, byrow = TRUE)
+    image_mat <- as.integer(magick::image_data(image)[1, , ])
+    image_mat_f <- cut(image_mat, breaks = breaks)
+    image_mat <- nlevels(image_mat_f) - as.integer(image_mat_f)
+    chr_mat <- matrix(image_mat,
+        nrow = size, byrow = TRUE
+    )
     class(chr_mat) <- c("chr_mat", class(chr_mat))
     chr_mat
 }
@@ -326,21 +332,34 @@ plot.chr_mat <- function(x, colors = c("grey", "red2"), ...) {
 #' @param chars chars
 #' @param colors c("grey","red2")
 #' @param save_file save_file
-#' @param speed 2
+#' @param speed pixel speed, default 32
 #' @param ... add
-#' @param LED_width LED_width, 64
+#' @param LED_width LED_width
+#' @param fps frame per second, 10
+#' @param LED_height LED_height, 64
+#' @param image_scale image scale, 10
 #'
 #' @return gif file
 #' @export
 #'
-make_LED <- function(chars = "HHH", save_file = NULL,
-                     LED_width = 64, speed = 2, colors = c("grey", "red2"), ...) {
-    lib_ps("animation", library = FALSE)
-    all_matrix <- lapply(strsplit(chars, "")[[1]], convert_chr_to_matrix)
+#' @examples
+#' \donttest{
+#' make_LED()
+#' }
+make_LED <- function(chars = "SOS!", save_file = NULL, LED_width = NULL,
+                     speed = 32, fps = 10, colors = c("grey", "red2"),
+                     LED_height = 32, image_scale = 10, ...) {
+    lib_ps("gifski", library = FALSE)
+    all_matrix <- lapply(strsplit(chars, "")[[1]], convert_chr_to_matrix, size = LED_height)
     all_com_matrix <- do.call(cbind, all_matrix)
 
-    pls <- list()
-    speed1 <- 2
+    if (is.null(LED_width)) {
+        if (nchar(chars) > 5) {
+            LED_width <- 5 * LED_height
+        } else {
+            LED_width <- nchar(chars) * LED_height
+        }
+    }
     if (LED_width > ncol(all_com_matrix)) {
         all_com_matrix <- cbind(
             all_com_matrix,
@@ -351,16 +370,105 @@ make_LED <- function(chars = "HHH", save_file = NULL,
         )
     }
     width1 <- ncol(all_com_matrix)
-    for (i in seq_len(width1 / speed1)) {
+
+    pps <- round(speed / fps)
+
+    pls <- list()
+    for (i in seq_len(width1 / pps)) {
         new_all_com_matrix <- cbind(
-            all_com_matrix[, (i * speed1):width1],
-            all_com_matrix[, 1:(i * speed1) - 1]
+            all_com_matrix[, (i * pps):width1],
+            all_com_matrix[, 1:(i * pps) - 1]
         )
         pls[[i]] <- plot.chr_mat(new_all_com_matrix[, 1:LED_width])
     }
 
     if (is.null(save_file)) save_file <- file.path(tempdir(), "temp_LED")
-    plotgif(pls, file = save_file, speed = speed, height = 32 * 10, width = LED_width * 10)
 
-    magick::image_read(path = paste0(save_file, ".gif"), ...)
+    gifski::save_gif(
+        {
+            for (i in pls) {
+                print(i)
+            }
+        },
+        gif_file = paste0(save_file, ".gif"),
+        delay = 1 / fps,
+        height = 32 * image_scale,
+        width = LED_width * image_scale
+    )
+
+    magick::image_read(path = paste0(save_file, ".gif"))
+}
+
+
+### 求下一个状态时格子周围值的和：
+life_neighbor <- function(m, x, y, size) {
+    # m为当前状态的矩阵；x和y为坐标；size为矩阵大小
+    fun.sum <- 0
+    for (i in c(x - 1, x, x + 1)) { # 依次遍历一个格子周围3x3的邻居格子
+        for (j in c(y - 1, y, y + 1)) {
+            # 如果格子在角落或者边，则邻居的值直接为0
+            if (i > 0 & i <= size & j > 0 & j <= size) fun.sum <- fun.sum + m[i, j] # 把9个格子先求和
+        }
+    }
+    fun.sum <- fun.sum - m[x, y] # 减去中间格子的值，即为周围8个值的和
+}
+
+#' Life Game Simulation
+#'
+#' @param save_file gif filename
+#' @param time how many times the life game continue.
+#' @param size size of the world
+#' @param fps fps, 0.75
+#' @param ... add
+#' @param colors c("green4", "black")
+#'
+#' @references \code{https://zhuanlan.zhihu.com/p/136727731}
+#' @return a gif file
+#' @export
+life_game <- function(save_file = NULL, size = 20, time = 20,
+                      fps = 0.75, colors = c("black", "green4"), ...) {
+    # Game of Life
+    ### 构造初始状态：
+    # 矩阵的行和列数
+    d <- round(runif(size * size, 0, 0.6)) # 最大值低一些，保证初始有值的少一些。
+    start <- matrix(data = d, ncol = size, nrow = size)
+
+    ### 设置运行次数
+    time <- time
+    life <- list()
+    life[[1]] <- start
+    for (k in 2:time) { # k = 3
+        life.next <- matrix(data = 0, ncol = size, nrow = size)
+        for (i in 1:size) {
+            for (j in 1:size) {
+                fun.sum <- life_neighbor(life[[k - 1]], i, j, size)
+
+                # 判断下个状态时当前位置是否有值存在。
+                # 孤单死亡：如果细胞的邻居小于等于1个，则该细胞在下一次状态将死亡；
+                # 拥挤死亡：如果细胞的邻居在4个及以上，则该细胞在下一次状态将死亡；
+                # 稳定：如果细胞的邻居为2个或3个，则下一次状态为稳定存活；
+                # 复活：如果某位置原无细胞存活，而该位置的邻居为2个或3个，则该位置将复活一个细胞
+
+                life.next[i, j] <- ifelse(fun.sum == 2 | fun.sum == 3, 1, 0)
+            }
+        }
+        life[[k]] <- life.next
+    }
+    pls <- lapply(life, plot.chr_mat, colors = colors)
+
+    if (is.null(save_file)) save_file <- file.path(tempdir(), "temp_life")
+
+    gifski::save_gif(
+        {
+            for (i in pls) {
+                print(i)
+            }
+        },
+        gif_file = paste0(save_file, ".gif"),
+        delay = 1 / fps,
+        width = 400,
+        height = 400
+    )
+
+    magick::image_read(path = paste0(save_file, ".gif"))
 }

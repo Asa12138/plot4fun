@@ -4,9 +4,9 @@
 \name{plot4fun-package}
 \alias{plot4fun}
 \alias{plot4fun-package}
-\title{plot4fun: Just plot for fun}
+\title{plot4fun: Just Plot for Fun}
 \description{
-This is a package containing many interseting functions for plotting.
+This is a package containing many interesting functions for plotting, such as `make_LED`, plot `Olympic_rings` and so on.
 }
 \author{
 \strong{Maintainer}: Chen Peng \email{pengchen2001@zju.edu.cn} (\href{https://orcid.org/0000-0002-9449-7606}{ORCID})

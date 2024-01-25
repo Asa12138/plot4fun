@@ -5,11 +5,14 @@
 \title{make a LED screen}
 \usage{
 make_LED(
-  chars = "HHH",
+  chars = "SOS!",
   save_file = NULL,
-  LED_width = 64,
-  speed = 2,
+  LED_width = NULL,
+  speed = 32,
+  fps = 10,
   colors = c("grey", "red2"),
+  LED_height = 32,
+  image_scale = 10,
   ...
 )
 }
@@ -18,11 +21,17 @@ make_LED(
 
 \item{save_file}{save_file}
 
-\item{LED_width}{LED_width, 64}
+\item{LED_width}{LED_width}
 
-\item{speed}{2}
+\item{speed}{pixel speed, default 32}
+
+\item{fps}{frame per second, 10}
 
 \item{colors}{c("grey","red2")}
+
+\item{LED_height}{LED_height, 64}
+
+\item{image_scale}{image scale, 10}
 
 \item{...}{add}
 }
@@ -31,4 +40,9 @@ gif file
 }
 \description{
 make a LED screen
+}
+\examples{
+\donttest{
+make_LED()
+}
 }

@@ -4,12 +4,14 @@
 \alias{convert_img_to_matrix}
 \title{convert a imgage to 01 matrix}
 \usage{
-convert_img_to_matrix(image_file, size = 32)
+convert_img_to_matrix(image_file, size = 32, breaks = 2)
 }
 \arguments{
 \item{image_file}{image_file}
 
 \item{size}{32}
+
+\item{breaks}{breaks, default 2}
 }
 \value{
 chr_mat
