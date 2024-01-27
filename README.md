@@ -1,15 +1,10 @@
----
-title: "plot4fun: plot for fun"
-output: 
-  prettydoc::html_pretty:
-    keep_md: true
-    toc: true
-    toc_depth: 3
-    theme: cayman
----
 
 
-
+<!-- badges: start -->
+[![](https://img.shields.io/badge/blog-@asa-blue.svg)](https://asa-blog.netlify.app/)
+[![CRAN status](https://www.r-pkg.org/badges/version/plot4fun)](https://CRAN.R-project.org/package=plot4fun)
+![Last Commit](https://img.shields.io/github/last-commit/Asa12138/plot4fun)
+<!-- badges: end -->
 
 
 # plot4fun

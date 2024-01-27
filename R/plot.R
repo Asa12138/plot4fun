@@ -294,12 +294,14 @@ convert_chr_to_matrix <- function(char, size = 32, font_file = NULL,
 #' @param colors c("grey","red2")
 #' @param x chr_mat object
 #' @param ... add
+#' @param random add random
 #'
 #' @return plot
 #' @exportS3Method
 #' @method plot chr_mat
-plot.chr_mat <- function(x, colors = c("grey", "red2"), ...) {
+plot.chr_mat <- function(x, colors = c("grey", "red2"),random=FALSE , ...) {
     d <- x
+    if(random)d=d+rnorm(length(d),0.2,0.1)
     lib_ps("reshape2", library = FALSE)
     col <- row <- value <- NULL
     d %>% as.data.frame() -> d
