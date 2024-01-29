@@ -1,12 +1,12 @@
 Package: plot4fun
 Type: Package
-Title: Just Plot for Fun
+Title: plot4fun: Just Plot for Fun
 Version: 0.1.0
 Authors@R:
     person("Chen", "Peng", email ="pengchen2001@zju.edu.cn", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9449-7606"))
 Description: Explore the world of R graphics with fun and interesting plot functions! 
-    Use `make_LED()` to create dynamic LED screens, draw interconnected rings with `Olympic_rings()`, 
-    and make festive Chinese couplets with `chunlian()`. 
+    Use make_LED() to create dynamic LED screens, draw interconnected rings with Olympic_rings(), 
+    and make festive Chinese couplets with chunlian(). 
     Unleash your creativity and turn data into exciting visuals!
 License: GPL-3
 Encoding: UTF-8

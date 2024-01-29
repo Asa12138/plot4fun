@@ -4,12 +4,14 @@
 \alias{plot.chr_mat}
 \title{Plot a chr_mat}
 \usage{
-\method{plot}{chr_mat}(x, colors = c("grey", "red2"), ...)
+\method{plot}{chr_mat}(x, colors = c("grey", "red2"), random = FALSE, ...)
 }
 \arguments{
 \item{x}{chr_mat object}
 
 \item{colors}{c("grey","red2")}
+
+\item{random}{add random}
 
 \item{...}{add}
 }

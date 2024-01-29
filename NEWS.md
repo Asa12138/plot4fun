@@ -2,6 +2,7 @@
 
 ## Added
 
+- Submitted to CRAN <2024-01-29, Mon>
 - `make_LED` can make a LED screen, very interesting! <2024-01-25, Thu>
 - `give_you_a_rose` (how to plot 3D?), `chunlian` (how to use Chinese font?), and `Olympic_rings` (how to arrange layers for these rings?). <2024-01-24, Wed>
 
