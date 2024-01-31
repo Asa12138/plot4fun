@@ -1,6 +1,6 @@
 Package: plot4fun
 Type: Package
-Title: plot4fun: Just Plot for Fun
+Title: Just Plot for Fun
 Version: 0.1.0
 Authors@R:
     person("Chen", "Peng", email ="pengchen2001@zju.edu.cn", role = c("aut", "cre"), comment = c(ORCID = "0000-0002-9449-7606"))

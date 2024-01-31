@@ -6,7 +6,7 @@
 \alias{plot4fun-package}
 \title{plot4fun: Just Plot for Fun}
 \description{
-Explore the world of R graphics with fun and interesting plot functions! Use `make_LED()` to create dynamic LED screens, draw interconnected rings with `Olympic_rings()`, and make festive Chinese couplets with `chunlian()`. Unleash your creativity and turn data into exciting visuals!
+Explore the world of R graphics with fun and interesting plot functions! Use make_LED() to create dynamic LED screens, draw interconnected rings with Olympic_rings(), and make festive Chinese couplets with chunlian(). Unleash your creativity and turn data into exciting visuals!
 }
 \author{
 \strong{Maintainer}: Chen Peng \email{pengchen2001@zju.edu.cn} (\href{https://orcid.org/0000-0002-9449-7606}{ORCID})
