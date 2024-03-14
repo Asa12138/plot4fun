@@ -1,3 +1,10 @@
+# plot4fun v0.1.1 Notes
+
+## Added
+
+- added `show_github_calendar` <2024-03-14, Thu>
+- added `clock` to plot a clock <2024-03-14, Thu>
+
 # plot4fun v0.1.0 Notes
 
 ## Added

@@ -43,6 +43,6 @@ make a LED screen
 }
 \examples{
 \donttest{
-make_LED()
+if (interactive()) make_LED("SOS!")
 }
 }

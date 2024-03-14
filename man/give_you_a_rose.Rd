@@ -16,5 +16,5 @@ plot
 Give you a rose
 }
 \references{
-\code{https://mp.weixin.qq.com/s/W-BYPR3UXL120XWpTmN3rA}
+\url{https://mp.weixin.qq.com/s/W-BYPR3UXL120XWpTmN3rA}
 }

@@ -32,6 +32,11 @@ a gif file
 \description{
 Life Game Simulation
 }
+\examples{
+\donttest{
+if (interactive()) life_game()
+}
+}
 \references{
-\code{https://zhuanlan.zhihu.com/p/136727731}
+\url{https://zhuanlan.zhihu.com/p/136727731}
 }

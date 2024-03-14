@@ -1,27 +1,50 @@
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
+# plot4fun
+
 <!-- badges: start -->
 
+[![Codecov test
+coverage](https://codecov.io/gh/Asa12138/plot4fun/branch/main/graph/badge.svg)](https://app.codecov.io/gh/Asa12138/plot4fun?branch=main)
+[![R-CMD-check](https://github.com/Asa12138/plot4fun/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Asa12138/plot4fun/actions/workflows/R-CMD-check.yaml)
 [![](https://img.shields.io/badge/blog-@asa-blue.svg)](https://asa-blog.netlify.app/)
 [![](http://cranlogs.r-pkg.org/badges/grand-total/plot4fun)](https://cran.r-project.org/package=plot4fun)
 [![](http://cranlogs.r-pkg.org/badges/last-month/plot4fun)](https://cran.r-project.org/package=plot4fun)
 [![](https://www.r-pkg.org/badges/version/plot4fun?color=green)](https://cran.r-project.org/package=plot4fun)
-[![](https://img.shields.io/badge/devel%20version-0.1.0-green.svg)](https://github.com/plot4fun)
+[![](https://img.shields.io/badge/devel%20version-0.1.1-green.svg)](https://github.com/Asa12138/plot4fun)
 <!-- badges: end -->
-
-# plot4fun
 
 `plot4fun` provides many interesting functions for plotting, such as
 `make_LED`, plot `Olympic_rings` and so on.
 
-## Install
+## Installation
+
+You can install the development version of plot4fun from
+[GitHub](https://github.com/) with:
 
 ``` r
-install.packages("devtools")
+# install.packages("devtools")
 devtools::install_github("Asa12138/plot4fun")
 ```
 
 ## Find fun
+
+### plot a clock
+
+``` r
+clock()
+```
+
+<img src="README_files/figure-gfm/unnamed-chunk-2-1.png" width="60%" />
+
+### github contribution calendar
+
+``` r
+show_github_calendar(usr = "asa12138", color = "skyblue")
+```
+
+<img src="README_files/figure-gfm/unnamed-chunk-3-1.png" width="100%" />
 
 ### make a LED
 
@@ -33,7 +56,7 @@ achr <- convert_chr_to_matrix("福")
 plot(achr)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-3-1.png)<!-- -->
+<img src="README_files/figure-gfm/unnamed-chunk-4-1.png" width="60%" />
 
 After that, we can try to make a dynamic LED screen:
 
@@ -41,7 +64,7 @@ After that, we can try to make a dynamic LED screen:
 make_LED("一起来画图！")
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-4-1.gif)<!-- -->
+<img src="README_files/figure-gfm/unnamed-chunk-5-1.gif" width="60%" />
 
 ### Olympic_rings
 
@@ -54,7 +77,7 @@ relationship between layers to display the correct graphics.
 Olympic_rings() + theme_classic()
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-5-1.png)<!-- -->
+<img src="README_files/figure-gfm/unnamed-chunk-6-1.png" width="60%" />
 
 ### Chunlian
 
@@ -67,7 +90,7 @@ expressing good wishes with neat and concise words.
 chunlian(c("科研顺利", "数据分析好到爆", "文章投哪哪都要"))
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-6-1.png)<!-- -->
+<img src="README_files/figure-gfm/unnamed-chunk-7-1.png" width="60%" />
 
 ### Game of Life
 
@@ -87,4 +110,4 @@ chunlian(c("科研顺利", "数据分析好到爆", "文章投哪哪都要"))
 life_game(size = 40, time = 20, fps = 1)
 ```
 
-![](README_files/figure-gfm/unnamed-chunk-7-1.gif)<!-- -->
+<img src="README_files/figure-gfm/unnamed-chunk-8-1.gif" width="60%" />

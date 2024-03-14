@@ -26,6 +26,8 @@ Word cloud plot
 \examples{
 \donttest{
 data(otutab, package = "pcutils")
-my_wordcloud(taxonomy$Genus)
+if (requireNamespace("wordcloud2")) {
+  my_wordcloud(taxonomy$Genus)
+}
 }
 }

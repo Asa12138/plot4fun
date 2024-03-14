@@ -27,5 +27,5 @@ Plot a DNA double helix
 DNA_plot()
 }
 \references{
-\code{https://github.com/SherryDong/create_plot_by_R_base}
+\url{https://github.com/SherryDong/create_plot_by_R_base}
 }
