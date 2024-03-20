@@ -1,7 +1,8 @@
-^.*\.Rproj$
-^\.Rproj\.user$
+man/figures
 README\.*
 .*\.md
+^.*\.Rproj$
+^\.Rproj\.user$
 plot4fun_temp
 plot4fun_temp/*
 ^README\.Rmd$

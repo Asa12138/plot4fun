@@ -31,5 +31,4 @@ Imports:
     sysfonts
 Suggests:
     wordcloud2,
-    geomtextpath,
-    covr
+    geomtextpath
