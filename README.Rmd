@@ -102,10 +102,12 @@ life_game(size = 40, time = 20, fps = 1)
 ```{r include=FALSE,eval=FALSE}
 library(hexSticker)
 showtext::showtext_auto()
-sticker("~/Documents/R/test/icons/画图.png", package="plot4fun", 
-        p_size=25,p_color = "#7D0A0A",p_fontface="bold.italic", p_family="Comic Sans MS",
-        s_x=1, s_y=.7, s_width=0.6, s_height=0.6,
-        h_fill="#FFFDD7",h_color = "#F28585",
-        filename="man/figures/plot4fun.png",dpi = 300,asp = 0.8)
+sticker("~/Documents/R/test/icons/画图.png",
+  package = "plot4fun",
+  p_size = 25, p_color = "#7D0A0A", p_fontface = "bold.italic", p_family = "Comic Sans MS",
+  s_x = 1, s_y = .7, s_width = 0.6, s_height = 0.6,
+  h_fill = "#FFFDD7", h_color = "#F28585",
+  filename = "man/figures/plot4fun.png", dpi = 300, asp = 0.8
+)
 ```
 

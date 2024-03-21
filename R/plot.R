@@ -503,6 +503,7 @@ clock <- function(x = format(Sys.time(), "%H:%M"),
                   time_label = as.roman(1:12),
                   rotate_text = FALSE, text_color = "black",
                   bg_color = "white", pointer_color = "black") {
+  V1 <- V3 <- V2 <- V4 <- label <- NULL
   if (is.character(x)) x <- as.numeric(strsplit(x, ":")[[1]])
   hours <- c(rep(x[1] %% 12 + tail(x, 1) / 60, 2), 0, 3.5)
   minutes <- c(rep(tail(x, 1) / 5, 2), 0, 5)

@@ -2,7 +2,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom utils data head download.file untar combn
+#' @importFrom utils data head download.file untar combn tail as.roman
 #' @importFrom stats runif rnorm
 #' @importFrom grDevices colorRampPalette png pdf dev.off
 #' @importFrom graphics plot.new text legend hist par

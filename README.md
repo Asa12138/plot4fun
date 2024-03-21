@@ -1,4 +1,5 @@
 
+
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 # plot4fun <img src="man/figures/plot4fun.png" align="right" width="120" />
