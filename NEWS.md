@@ -2,6 +2,7 @@
 
 ## Added
 
+- add `plotly` mode for `give_you_a_rose` <2024-05-12, Sun>
 - added `show_github_calendar` <2024-03-14, Thu>
 - added `clock` to plot a clock <2024-03-14, Thu>
 

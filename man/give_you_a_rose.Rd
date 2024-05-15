@@ -4,10 +4,12 @@
 \alias{give_you_a_rose}
 \title{Give you a rose}
 \usage{
-give_you_a_rose(color = "red3")
+give_you_a_rose(color = "red3", mode = "plot3D")
 }
 \arguments{
 \item{color}{"skyblue3"}
+
+\item{mode}{"plot3D" or "plotly"}
 }
 \value{
 plot

@@ -26,16 +26,12 @@ my_wordcloud <- function(str_vector,
 #' Give you a rose
 #'
 #' @param color "skyblue3"
+#' @param mode "plot3D" or "plotly"
 #'
 #' @return plot
 #' @export
 #' @references <https://mp.weixin.qq.com/s/W-BYPR3UXL120XWpTmN3rA>
-give_you_a_rose <- function(color = "red3") {
-  oldpar <- graphics::par(no.readonly = TRUE)
-  on.exit(graphics::par(oldpar))
-  graphics::par(mar = rep(1, 4))
-
-  lib_ps("plot3D", library = FALSE)
+give_you_a_rose <- function(color = "red3", mode = "plot3D") {
   # 生成绘图数据
   x <- seq(0, 24) / 24
   t <- seq(0, 575, by = 0.5) / 575 * 20 * pi + 4 * pi
@@ -47,23 +43,57 @@ give_you_a_rose <- function(color = "red3") {
   u <- 1 - (1 - (3.6 * t) %% (2 * pi) / pi)^4 / 2 + change
   y <- 2 * (x^2 - x)^2 * sin(p)
   r <- u * (x * sin(p) + y * cos(p))
-  # 绘图
-  plot3D::persp3D(
-    x = r * cos(t), y = r * sin(t), z = u * (x * cos(p) - y * sin(p)),
-    main = "To you",
-    # xlim=c(-0.5,0.5),ylim=c(-0.5,0.5),zlim=c(0,1),
-    xlab = "Love youself",
-    ylab = "Love youself",
-    zlab = "Love youself",
-    col = grDevices::colorRampPalette(c("#e4e9f6", color))(100),
-    border = "grey85",
-    lwd = 0.1,
-    facets = TRUE,
-    colkey = FALSE,
-    bty = "b2",
-    theta = -60, phi = 45
-  )
-  message("give you a rose \ud83c\udf39.")
+
+  xx <- r * cos(t)
+  yy <- r * sin(t)
+  zz <- u * (x * cos(p) - y * sin(p))
+
+  if (mode == "plotly") {
+    lib_ps("plotly", library = FALSE)
+    # 使用plotly生成三维曲面图，颜色为红色系，透明度为0.5
+    plot <- plotly::plot_ly(
+      x = ~xx, y = ~yy, z = ~zz,
+      colors = grDevices::colorRampPalette(c("#e4e9f6", color))(100),
+      opacity = 0.8
+    ) %>% plotly::add_surface()
+    # 不展示legend
+    # 向图中添加绿色线条，这些线条可以代表花茎或其它装饰线
+    plot <- plot %>%
+      plotly::add_trace(plot,
+        x = rep(0), y = rep(0), z = seq(-0.3, 0, length = 4),
+        mode = "lines", line = list(color = "green", width = 8)
+      ) %>%
+      plotly::layout(scene = list(
+        xaxis = list(visible = FALSE),
+        yaxis = list(visible = FALSE),
+        zaxis = list(visible = FALSE)
+      ), showlegend = FALSE) %>%
+      plotly::hide_colorbar()
+    return(plot)
+  } else if (mode == "plot3D") {
+    oldpar <- graphics::par(no.readonly = TRUE)
+    on.exit(graphics::par(oldpar))
+    graphics::par(mar = rep(1, 4))
+
+    lib_ps("plot3D", library = FALSE)
+    # 绘图
+    plot3D::persp3D(
+      x = xx, y = yy, z = zz,
+      main = "To you",
+      # xlim=c(-0.5,0.5),ylim=c(-0.5,0.5),zlim=c(0,1),
+      xlab = "Love youself",
+      ylab = "Love youself",
+      zlab = "Love youself",
+      col = grDevices::colorRampPalette(c("#e4e9f6", color))(100),
+      border = "grey85",
+      lwd = 0.1,
+      facets = TRUE,
+      colkey = FALSE,
+      bty = "b2",
+      theta = -60, phi = 45
+    )
+    message("give you a rose \ud83c\udf39.")
+  }
 }
 
 

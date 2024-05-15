@@ -25,6 +25,7 @@ Imports:
     pcutils,
     ggforce,
     plot3D,
+    plotly,
     magick,
     gifski,
     showtext,
