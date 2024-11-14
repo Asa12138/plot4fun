@@ -1,60 +1,24 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-  <url>
-    <loc>/404.html</loc>
-  </url>
-  <url>
-    <loc>/authors.html</loc>
-  </url>
-  <url>
-    <loc>/index.html</loc>
-  </url>
-  <url>
-    <loc>/news/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/DNA_plot.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Olympic_rings.html</loc>
-  </url>
-  <url>
-    <loc>/reference/chunlian.html</loc>
-  </url>
-  <url>
-    <loc>/reference/clock.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_chr_to_matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/convert_img_to_matrix.html</loc>
-  </url>
-  <url>
-    <loc>/reference/give_you_a_rose.html</loc>
-  </url>
-  <url>
-    <loc>/reference/index.html</loc>
-  </url>
-  <url>
-    <loc>/reference/life_game.html</loc>
-  </url>
-  <url>
-    <loc>/reference/make_LED.html</loc>
-  </url>
-  <url>
-    <loc>/reference/my_wordcloud.html</loc>
-  </url>
-  <url>
-    <loc>/reference/pipe.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot.chr_mat.html</loc>
-  </url>
-  <url>
-    <loc>/reference/plot4fun-package.html</loc>
-  </url>
-  <url>
-    <loc>/reference/show_github_calendar.html</loc>
-  </url>
+<urlset xmlns = 'http://www.sitemaps.org/schemas/sitemap/0.9'>
+<url><loc>/404.html</loc></url>
+<url><loc>/authors.html</loc></url>
+<url><loc>/index.html</loc></url>
+<url><loc>/news/index.html</loc></url>
+<url><loc>/reference/DNA_plot.html</loc></url>
+<url><loc>/reference/Moon_cake.html</loc></url>
+<url><loc>/reference/Olympic_rings.html</loc></url>
+<url><loc>/reference/chunlian.html</loc></url>
+<url><loc>/reference/clock.html</loc></url>
+<url><loc>/reference/convert_chr_to_matrix.html</loc></url>
+<url><loc>/reference/convert_img_to_matrix.html</loc></url>
+<url><loc>/reference/give_you_a_rose.html</loc></url>
+<url><loc>/reference/index.html</loc></url>
+<url><loc>/reference/life_game.html</loc></url>
+<url><loc>/reference/make_LED.html</loc></url>
+<url><loc>/reference/my_wordcloud.html</loc></url>
+<url><loc>/reference/pipe.html</loc></url>
+<url><loc>/reference/pixel_plot.html</loc></url>
+<url><loc>/reference/plot.chr_mat.html</loc></url>
+<url><loc>/reference/plot4fun-package.html</loc></url>
+<url><loc>/reference/show_github_calendar.html</loc></url>
 </urlset>
+
