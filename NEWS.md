@@ -1,3 +1,10 @@
+# plot4fun v0.1.2 Notes
+
+## Added
+
+- added `pixel_plot` function <2024-11-14, Thu>
+- added `Moon_cake` function <2024-11-14, Thu>
+
 # plot4fun v0.1.1 Notes
 
 ## Added

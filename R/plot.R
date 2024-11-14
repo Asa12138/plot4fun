@@ -212,6 +212,98 @@ chunlian <- function(words = NULL, bg_size = 20, bg_shape = 22, bg_fill = "red2"
   p
 }
 
+
+#' Draw a Moon_cake (Mid- Autumn Festival) using ggplot2
+#'
+#' @param cake_color Color of the cake, default is "orange"
+#' @param cake_fill Fill color of the cake, default is "white"
+#' @param stuffing Stuffing of the cake
+#'
+#' @return ggplot
+#' @export
+#'
+Moon_cake <- function(cake_color = "orange", cake_fill = "white", stuffing = "\u4e94\u4ec1") {
+  # 定义一些参数
+  length <- 20
+  R <- sqrt(3) * length / (sqrt(3) * cos(pi / 12) - sin(pi / 12))
+  r <- 2 * sin(pi / 12) * R / sqrt(3)
+
+  # 生成半圆弧形的函数
+  generate_arc_data <- function(center_x, center_y, r, start_angle, end_angle, n = 100) {
+    angles <- seq(start_angle, end_angle, length.out = n)
+    data.frame(
+      x = center_x + r * cos(angles),
+      y = center_y + r * sin(angles)
+    )
+  }
+
+  # 生成所有弧形数据
+  arc_data_list <- list(
+    generate_arc_data(0, length, r, pi / 6, 5 * pi / 6),
+    generate_arc_data(-length / 2, length / 2 * sqrt(3), r, pi / 3, pi),
+    generate_arc_data(-length / 2 * sqrt(3), length / 2, r, pi / 2, 7 * pi / 6),
+    generate_arc_data(-length, 0, r, 2 * pi / 3, 4 * pi / 3),
+    generate_arc_data(-length / 2 * sqrt(3), -length / 2, r, 5 * pi / 6, 3 * pi / 2),
+    generate_arc_data(-length / 2, -length / 2 * sqrt(3), r, pi, 10 * pi / 6),
+    generate_arc_data(0, -length, r, 7 * pi / 6, 11 * pi / 6),
+    generate_arc_data(length / 2, -length / 2 * sqrt(3), r, 4 * pi / 3, 2 * pi),
+    generate_arc_data(length / 2 * sqrt(3), -length / 2, r, 3 * pi / 2, 2 * pi + pi / 6),
+    generate_arc_data(length, 0, r, 5 * pi / 3, 7 * pi / 3),
+    generate_arc_data(length / 2 * sqrt(3), length / 2, r, 11 * pi / 6, 2 * pi + pi / 2),
+    generate_arc_data(length / 2, length / 2 * sqrt(3), r, 0, 2 * pi / 3)
+  )
+
+  # 生成直角扇形的坐标点的函数
+  generate_wedge_data <- function(center_x = 0, center_y = 0, r = 1, start_angle = 0, end_angle = pi / 2, n = 100, xjust = 0, yjust = 0) {
+    # 生成从起始角度到结束角度的序列
+    angles <- seq(start_angle, end_angle, length.out = n)
+
+    # 计算扇形边界的坐标点
+    x_coords <- center_x + r * cos(angles)
+    y_coords <- center_y + r * sin(angles)
+
+    # 添加中心点和起始点，用于形成完整的扇形
+    x_coords <- c(center_x, x_coords, center_x)
+    y_coords <- c(center_y, y_coords, center_y)
+
+    # 返回数据框形式的坐标点
+    data.frame(x = x_coords + xjust, y = y_coords + yjust)
+  }
+
+  # 生成所有扇形数据
+  wedge_data_list <- list(
+    generate_wedge_data(0, 0, R * 0.8, 0, pi / 2, n = 100, xjust = 0.05 * R, yjust = 0.05 * R),
+    generate_wedge_data(0, 0, R * 0.8, pi / 2, pi, n = 100, xjust = -0.05 * R, yjust = 0.05 * R),
+    generate_wedge_data(0, 0, R * 0.8, pi, 3 * pi / 2, n = 100, xjust = -0.05 * R, yjust = -0.05 * R),
+    generate_wedge_data(0, 0, R * 0.8, 3 * pi / 2, 2 * pi, n = 100, xjust = 0.05 * R, yjust = -0.05 * R)
+  )
+
+  # 生成内部圆形数据
+  circle_data <- generate_arc_data(0, 0, R, 0, 2 * pi)
+  lib_ps("sysfonts", "showtext", library = FALSE)
+
+  showtext::showtext_auto()
+  # 绘制月饼的外边缘和内圈
+  ggplot() +
+    # 绘制外部波浪形边缘
+    lapply(arc_data_list, function(arc_data) {
+      geom_polygon(data = arc_data, aes(x = x, y = y), fill = cake_fill, color = cake_color, size = 1.5)
+    }) +
+    # 绘制中间的圆圈
+    geom_polygon(data = circle_data, aes(x = x, y = y), fill = cake_fill, color = cake_color, size = 1.5) +
+    lapply(wedge_data_list, function(wedge_data) {
+      geom_polygon(data = wedge_data, aes(x = x, y = y), fill = cake_fill, color = cake_color, size = 1.5)
+    }) +
+    geom_label(
+      data = data.frame(x = 0, y = 0, label = stuffing),
+      aes(x = x, y = y, label = label), size = 14, color = cake_color, fill = cake_fill,
+    ) +
+    coord_fixed() +
+    theme_void() +
+    labs(title = "\u4e2d\u79cb\u8282\u5feb\u4e50")
+}
+
+
 #' Plot the Olympic rings
 #'
 #' @return ggplot
@@ -597,4 +689,63 @@ show_github_calendar <- function(usr = "asa12138", color = NULL, save_file = NUL
   lib_ps("magick", library = FALSE)
   image <- magick::image_read(save_file, density = 300, ...)
   plot(image[1])
+}
+
+
+
+#' Plot a pixel image
+#'
+#' @param image image path
+#' @param size plot size, default: 32
+#' @param geom point or tile, default: "point"
+#' @param geom_param geom_param, default: list(size = 4)
+#'
+#' @return ggplot
+#' @export
+pixel_plot <- function(image, size = 32, geom = c("point", "tile"), geom_param = list()) {
+  # 检查参数
+  geom <- match.arg(geom)
+
+  # 读取图片
+  img <- magick::image_read(image)
+
+  # 获取图片原始尺寸
+  img_info <- magick::image_info(img)
+  img_width <- img_info$width
+  img_height <- img_info$height
+
+  # 确保pixel_size不大于原图片尺寸
+  pixel_size <- min(size, img_width, img_height)
+
+  # 缩放图片到指定像素大小
+  img_resized <- magick::image_scale(img, paste0(pixel_size, "x", pixel_size))
+
+  # 将图片转换为数据框，提取颜色和位置信息
+  img_data <- as.data.frame(as.matrix(as.raster(img_resized)))
+  nice_size <- 24 / ceiling(sqrt(nrow(img_data)))
+
+  # 添加行和列信息
+  img_data2 <- data.frame(
+    col = rep(1:ncol(img_data), each = nrow(img_data)),
+    row = rep(1:nrow(img_data), ncol(img_data)),
+    value = unlist(img_data)
+  )
+
+  # 使用ggplot绘制像素图
+  p <- ggplot(img_data2, aes(x = col, y = -row, fill = value, col = value)) +
+    scale_color_identity() +
+    scale_fill_identity() +
+    coord_equal() +
+    theme_void() +
+    theme(legend.position = "none")
+
+  # 根据geom参数选择绘图方式
+  if (geom == "point") {
+    p <- p + do.call(geom_point, utils::modifyList(list(size = nice_size), geom_param))
+  } else if (geom == "tile") {
+    p <- p + geom_tile()
+  }
+
+  # 显示绘图结果
+  p
 }

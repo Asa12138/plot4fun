@@ -44,6 +44,13 @@ devtools::install_github("Asa12138/plot4fun")
 
 ## Find fun
 
+### plot a pixel image
+
+```{r}
+pixel_plot("https://stardewvalleywiki.com/mediawiki/images/b/b2/Animals_Icon.png")
+```
+
+
 ### plot a clock
 
 ```{r}
@@ -86,6 +93,12 @@ Spring couplets, also known as "spring paste", "door pair", "couplets", is a kin
 
 ```{r}
 chunlian(c("科研顺利", "数据分析好到爆", "文章投哪哪都要"))
+```
+
+### plot a moon cake
+
+```{r}
+Moon_cake()
 ```
 
 ### Game of Life
